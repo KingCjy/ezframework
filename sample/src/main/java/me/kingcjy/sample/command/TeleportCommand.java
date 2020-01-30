@@ -11,16 +11,21 @@ import org.bukkit.entity.Player;
 public class TeleportCommand {
 
     @Command("<toPlayer>")
-    public void onTeleportTo(@PathVariable String toPlayer, Player player) {
-        Player to = Bukkit.getPlayer(toPlayer);
-        player.teleport(to);
+    public void onTeleportTo(@PathVariable String toPlayer) {
+//        Player to = Bukkit.getPlayer(toPlayer);
+//        player.teleport(to);
+
+        System.out.println(toPlayer);
     }
 
     @Command("<fromPlayer> <toPlayer>")
     public void onTeleportFromTo(@PathVariable String fromPlayer, @PathVariable String toPlayer) {
-        Player from = Bukkit.getPlayer(fromPlayer);
-        Player to = Bukkit.getPlayer(toPlayer);
-        from.teleport(to);
+//        Player from = Bukkit.getPlayer(fromPlayer);
+//        Player to = Bukkit.getPlayer(toPlayer);
+//        from.teleport(to);
+
+        System.out.println(fromPlayer);
+        System.out.println(toPlayer);
     }
 
     @NotFound
