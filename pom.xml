@@ -11,8 +11,6 @@
     <modules>
         <module>ezframework</module>
         <module>sample</module>
-
-        <module>CraftBukkit</module>
     </modules>
 
 </project>

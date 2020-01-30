@@ -15,12 +15,11 @@ public class EzCommandExecutor implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String label, String[] args) {
-        CommandArgs commandArgs = new CommandArgs(commandSender, command, label, args);
-//        String cmd = getCommandString(label, args);
-        String cmd = getCommandString("teleport", new String[]{"fromPlayer", "toPlayer"});
+        String cmd = getCommandString(label, args);
+        CommandArgs commandArgs = new CommandArgs(commandSender, command, label, args, cmd);
 
         InvocableHandlerMethod invocableHandlerMethod = annotationHandlerMapping.getHandler(cmd);
-        invocableHandlerMethod.invoke(commandArgs);
+        invocableHandlerMethod.invoke(commandArgs, commandArgs, commandSender, command);
 
         return true;
     }

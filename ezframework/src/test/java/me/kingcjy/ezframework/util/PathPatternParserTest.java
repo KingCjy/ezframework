@@ -13,8 +13,8 @@ public class PathPatternParserTest {
 
     @Test
     public void StringArrayJoinTest() {
-        String[] args = { "from", "to", "be" };
-
-        System.out.println(String.join(" ", args));
+//        String[] args = { "from", "to", "be" };
+//
+//        System.out.println(String.join(" ", args));
     }
 }

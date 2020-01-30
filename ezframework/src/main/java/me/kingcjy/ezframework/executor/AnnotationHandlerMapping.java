@@ -56,12 +56,12 @@ public class AnnotationHandlerMapping implements HandlerMapping, BeanFactoryAwar
         String classCommand = findClassCommand(method.getDeclaringClass());
         String methodCommand = findMethodCommand(method);
 
-        return new HandlerKey(classCommand + methodCommand);
+        return new HandlerKey(classCommand + " " + methodCommand);
     }
 
     private String findClassCommand(Class<?> targetClass) {
-        if(targetClass.isAnnotationPresent(Command.class)) {
-            Command command = targetClass.getAnnotation(Command.class);
+        if(targetClass.isAnnotationPresent(CommandService.class)) {
+            CommandService command = targetClass.getAnnotation(CommandService.class);
             return command.value();
         }
         return "";

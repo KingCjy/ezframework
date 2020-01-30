@@ -42,10 +42,16 @@ public class PathVariableHandlerMethodArgumentResolver implements HandlerMethodA
 
         PathPatternParser pathPatternParser = pathPatternParserCache.get(command);
 
-        Map<String, String> pathParameterMap = pathPatternParser.getPathParameterMap(command);
-        System.out.println(parameter.getMethod().getParameters()[0].getName());
+        Map<String, String> pathParameterMap = pathPatternParser.getPathParameterMap(commandArgs.getFullCommand());
+
+        String parameterName = getParameterName(pathVariable, parameter);
+
+        if(parameter.getParameterType().equals(String.class)) {
+            return pathParameterMap.get(parameterName);
+        }
+
         try {
-            Object object =  objectMapper.readValue(pathParameterMap.get(pathVariable.value()), parameter.getParameterType());
+            Object object =  objectMapper.readValue(pathParameterMap.get(parameterName), parameter.getParameterType());
             return object;
         } catch (IOException e) {
             logger.error(e.getMessage());
@@ -55,5 +61,13 @@ public class PathVariableHandlerMethodArgumentResolver implements HandlerMethodA
 
     public String getCommand(CommandService commandService, Command commandAnnotation) {
         return commandService.value() +  " " + commandAnnotation.value();
+    }
+
+    private String getParameterName(PathVariable pathVariable, MethodParameter parameter) {
+        if("".equals(pathVariable.value()) == false) {
+            return pathVariable.value();
+        }
+
+        return parameter.getName();
     }
 }

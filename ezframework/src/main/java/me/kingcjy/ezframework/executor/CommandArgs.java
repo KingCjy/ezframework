@@ -8,12 +8,14 @@ public class CommandArgs {
     private Command command;
     private String label;
     private String[] args;
+    private String fullCommand;
 
-    CommandArgs(CommandSender commandSender, Command command, String label, String[] args) {
+    CommandArgs(CommandSender commandSender, Command command, String label, String[] args, String fullCommand) {
         this.commandSender = commandSender;
         this.command = command;
         this.label = label;
         this.args = args;
+        this.fullCommand = fullCommand;
     }
 
     public CommandSender getCommandSender() {
@@ -46,5 +48,9 @@ public class CommandArgs {
 
     public void setArgs(String[] args) {
         this.args = args;
+    }
+
+    public String getFullCommand() {
+        return fullCommand;
     }
 }

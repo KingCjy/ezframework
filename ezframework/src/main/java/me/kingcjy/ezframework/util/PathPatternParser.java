@@ -19,8 +19,7 @@ public class PathPatternParser {
         Matcher matcher = Pattern.compile(PATTERN).matcher(uri);
         while(matcher.find()) {
             regex = regex.replace(matcher.group(0), "" +
-                    " (?<" + matcher.group(1) + ">(.*?))");
-
+                    " (?<" + matcher.group(1) + ">[^\\s]*)");
             this.keys.add(matcher.group(1));
         }
         regex+="$";
@@ -41,7 +40,10 @@ public class PathPatternParser {
             return new HashMap<>();
         }
 
-        keys.forEach(key -> pathParameterMap.put(key, matcher.group(key)));
+        keys.forEach(key -> {
+            String value = matcher.group(key).replaceAll("[\\<\\>]", "");
+            pathParameterMap.put(key, value);
+        });
         return pathParameterMap;
     }
 }

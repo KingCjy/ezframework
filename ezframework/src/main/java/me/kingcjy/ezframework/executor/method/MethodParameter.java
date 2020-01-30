@@ -12,13 +12,13 @@ public class MethodParameter {
 
     private Method method;
     private int parameterIndex;
-
+    private String name;
     private Class<?> parameterType;
 
     public MethodParameter(Method method, int parameterIndex) {
         this.method = method;
         this.parameterIndex = parameterIndex;
-
+        this.name = method.getParameters()[parameterIndex].getName();
         this.parameterType = method.getParameterTypes()[this.parameterIndex];
     }
 
@@ -37,6 +37,10 @@ public class MethodParameter {
 
     public int getParameterIndex() {
         return parameterIndex;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public Class<?> getParameterType() {
