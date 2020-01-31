@@ -19,7 +19,6 @@ public class AnnotationHandlerMapping implements HandlerMapping, BeanFactoryAwar
     private BeanFactory beanFactory;
     private Map<HandlerKey, InvocableHandlerMethod> handlers = new HashMap<>();
 
-
     private DefaultHandlerMethodFactory handlerMethodFactory;
 
     public AnnotationHandlerMapping(BeanFactory beanFactory, DefaultHandlerMethodFactory defaultHandlerMethodFactory) {
@@ -48,7 +47,7 @@ public class AnnotationHandlerMapping implements HandlerMapping, BeanFactoryAwar
 
             InvocableHandlerMethod handlerMethod = handlerMethodFactory.createInvocableHandlerMethod(controllers.get(method.getDeclaringClass()), method);
             handlers.put(handlerKey, handlerMethod);
-            logger.debug("register commandMethod uri : {}, method: {}", handlerKey.getCommand(), method);
+            logger.debug("register command : /{}, method: {}", handlerKey.getCommand(), method);
         }
     }
 
@@ -56,6 +55,9 @@ public class AnnotationHandlerMapping implements HandlerMapping, BeanFactoryAwar
         String classCommand = findClassCommand(method.getDeclaringClass());
         String methodCommand = findMethodCommand(method);
 
+        if("".equals(classCommand)) {
+            return new HandlerKey(methodCommand);
+        }
         return new HandlerKey(classCommand + " " + methodCommand);
     }
 
@@ -110,5 +112,10 @@ public class AnnotationHandlerMapping implements HandlerMapping, BeanFactoryAwar
             return null;
         }
         return handlers.get(handlerKeyOptional.get());
+    }
+
+    @Override
+    public Set<HandlerKey> getHandlerKeys() {
+        return handlers.keySet();
     }
 }

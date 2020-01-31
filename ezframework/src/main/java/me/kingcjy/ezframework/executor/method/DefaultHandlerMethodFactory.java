@@ -11,7 +11,7 @@ import java.util.Set;
 
 public class DefaultHandlerMethodFactory implements BeanFactoryAware, InitializingBean {
 
-    private final HandlerMethodArgumentResolverComposite resolvers = new HandlerMethodArgumentResolverComposite();
+    private final HandlerMethodParameterProviderComposite providers = new HandlerMethodParameterProviderComposite();
 
     private BeanFactory beanFactory;
 
@@ -22,22 +22,22 @@ public class DefaultHandlerMethodFactory implements BeanFactoryAware, Initializi
 
     @Override
     public void afterPropertiesSet() {
-        this.resolvers.addResolver(initArgumentResolvers());
+        this.providers.addResolver(initArgumentResolvers());
     }
 
-    private HandlerMethodArgumentResolver[] initArgumentResolvers() {
-        Set<HandlerMethodArgumentResolver> resolvers = new HashSet();
+    private HandlerMethodParameterProvider[] initArgumentResolvers() {
+        Set<HandlerMethodParameterProvider> providers = new HashSet();
         for (Object bean : beanFactory.getBeans()) {
-            if(HandlerMethodArgumentResolver.class.isAssignableFrom(bean.getClass()) && bean.getClass().isAnnotationPresent(Component.class)) {
-                resolvers.add((HandlerMethodArgumentResolver) bean);
+            if(HandlerMethodParameterProvider.class.isAssignableFrom(bean.getClass()) && bean.getClass().isAnnotationPresent(Component.class)) {
+                providers.add((HandlerMethodParameterProvider) bean);
             }
         }
-        return resolvers.toArray(new HandlerMethodArgumentResolver[]{});
+        return providers.toArray(new HandlerMethodParameterProvider[]{});
     }
 
     public InvocableHandlerMethod createInvocableHandlerMethod(Object bean, Method method) {
         InvocableHandlerMethod invocableHandlerMethod = new InvocableHandlerMethod(bean, method);
-        invocableHandlerMethod.setMessageMethodArgumentResolvers(resolvers);
+        invocableHandlerMethod.setMessageMethodArgumentResolvers(providers);
         return invocableHandlerMethod;
     }
 }

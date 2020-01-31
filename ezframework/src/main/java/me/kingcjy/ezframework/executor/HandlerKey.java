@@ -7,7 +7,7 @@ public class HandlerKey {
     private String command;
     private PathPatternParser parser;
 
-    public HandlerKey(String command) {
+    HandlerKey(String command) {
         this.command = command;
         parser = new PathPatternParser(command);
     }

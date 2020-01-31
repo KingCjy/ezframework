@@ -7,10 +7,10 @@ import org.bukkit.command.CommandSender;
 
 public class EzCommandExecutor implements CommandExecutor {
 
-    private AnnotationHandlerMapping annotationHandlerMapping;
+    private HandlerMapping handlerMapping;
 
-    public EzCommandExecutor(AnnotationHandlerMapping annotationHandlerMapping) {
-        this.annotationHandlerMapping = annotationHandlerMapping;
+    public EzCommandExecutor(HandlerMapping handlerMapping) {
+        this.handlerMapping = handlerMapping;
     }
 
     @Override
@@ -18,7 +18,7 @@ public class EzCommandExecutor implements CommandExecutor {
         String cmd = getCommandString(label, args);
         CommandArgs commandArgs = new CommandArgs(commandSender, command, label, args, cmd);
 
-        InvocableHandlerMethod invocableHandlerMethod = annotationHandlerMapping.getHandler(cmd);
+        InvocableHandlerMethod invocableHandlerMethod = handlerMapping.getHandler(cmd);
         invocableHandlerMethod.invoke(commandArgs, commandArgs, commandSender, command);
 
         return true;

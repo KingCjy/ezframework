@@ -11,14 +11,14 @@ public class InvocableHandlerMethod extends HandlerMethod {
 
     private static Logger logger = LoggerFactory.getLogger(InvocableHandlerMethod.class);
 
-    private HandlerMethodArgumentResolverComposite resolvers = new HandlerMethodArgumentResolverComposite();
+    private HandlerMethodParameterProviderComposite providers = new HandlerMethodParameterProviderComposite();
 
     public InvocableHandlerMethod(Object instance, Method method) {
         super(instance, method);
     }
 
-    public void setMessageMethodArgumentResolvers(HandlerMethodArgumentResolverComposite argumentResolvers) {
-        this.resolvers = argumentResolvers;
+    public void setMessageMethodArgumentResolvers(HandlerMethodParameterProviderComposite parameterProviders) {
+        this.providers = parameterProviders;
     }
 
     public Object invoke(CommandArgs commandArgs, Object... providedArguments) {
@@ -44,8 +44,8 @@ public class InvocableHandlerMethod extends HandlerMethod {
                 continue;
             }
 
-            if(this.resolvers.supportsParameter(parameter)) {
-                args[i] = this.resolvers.resolveArgument(commandArgs, parameter);
+            if(this.providers.supportsParameter(parameter)) {
+                args[i] = this.providers.resolveParameter(commandArgs, parameter);
             }
         }
 
