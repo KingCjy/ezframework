@@ -4,7 +4,7 @@
   <groupId>io.github.kingcjy</groupId>
   <artifactId>ezframework-core</artifactId>
   <name>EzFramework</name>
-  <version>1.0.3</version>
+  <version>1.0.4</version>
   <description>Spigot Command Framework</description>
   <url>https://github.com/KingCjy/ezframework</url>
   <developers>
