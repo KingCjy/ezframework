@@ -1,4 +1,4 @@
-#Ezframework
+# Ezframework
 [![Download](https://api.bintray.com/packages/kingcjy/ezframework/ezframework-core/images/download.svg) ](https://bintray.com/kingcjy/ezframework/ezframework-core/_latestVersion)
 
 
@@ -8,7 +8,7 @@ Ezframework는 Spigot에서 사용할 수 있는 IOC 기반 커맨드 프레임�
 ## 사용 방법
 
 
-###Maven
+### Maven
 
 ```xml
 <dependencies>
@@ -36,7 +36,7 @@ Ezframework는 Spigot에서 사용할 수 있는 IOC 기반 커맨드 프레임�
 </build>
 ```
 
-###Gradle
+### Gradle
 ```groovy
 dependencies {
     implementation 'io.github.kingcjy:ezframework-core:1.0.3'
