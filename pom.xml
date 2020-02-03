@@ -7,7 +7,7 @@
     <groupId>io.github.kingcjy</groupId>
     <artifactId>ezframework-core</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
 
     <name>EzFramework</name>
     <description>Spigot Command Framework</description>
