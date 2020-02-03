@@ -1,0 +1,78 @@
+plugins{
+    id 'java'
+    id 'signing'
+    id 'maven-publish'
+}
+
+group 'io.github.kingcjy'
+version '1.0.4'
+
+repositories{
+    maven{
+        url 'https://maven.heartpattern.kr/repository/maven-public/'
+    }
+}
+
+dependencies{
+    compileOnly "org.spigotmc:spigot-api:1.15.1-R0.1-SNAPSHOT"
+    compile "org.reflections:reflections:0.9.11"
+    compile "ch.qos.logback:logback-classic:1.2.3"
+    compile "com.fasterxml.jackson.core:jackson-databind:2.10.1"
+    testImplementation "junit:junit:4.12"
+}
+
+jar{
+    from(
+            configurations.compile.collect{it.isDirectory()?it:zipTree(it)}
+    )
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    archiveClassifier.set('sources')
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    archiveClassifier.set('javadoc')
+    from javadoc.destinationDir
+}
+
+publishing{
+    publications{
+        mavenJava(MavenPublication){
+            artifact jar
+            artifact sourcesJar
+            artifact javadocJar
+            pom{
+                name = 'EzFramework'
+                description = 'Spigot Command Framework'
+                url = 'https://github.com/KingCjy/ezframework'
+                licenses{
+                    license {
+                        name = 'The Apache Software License, Version 2.0'
+                        url = 'https://opensource.org/licenses/Apache-2.0'
+                    }
+                }
+                scm{
+                    url = 'https://github.com/KingCjy/ezframework'
+                }
+                developers{
+                    developer{
+                        name = 'kingcjy'
+                        email = 'tlssycks@gmail.com'
+                    }
+                }
+            }
+        }
+    }
+
+    repositories{
+        maven{
+            url 'https://api.bintray.com/maven/kingcjy/ezframework/ezframework-core/;publish=1'
+        }
+    }
+}
+
+signing{
+//    sign(publishing.publications.mavenJava)
+}
