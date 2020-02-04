@@ -10,5 +10,6 @@ cache:
 before_install:
   - openssl enc -d -in ezframework.gpg.enc -out ezframework.gpg -aes256 -pass "pass:$SECRET_KEY_PASSWORD"
   - gpg --import ezframework.gpg
+  - gpg-agent --version
 
 script: "mvn deploy -P release --settings settings.xml"
