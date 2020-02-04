@@ -5,11 +5,10 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 
-Ezframework는 Spigot에서 사용할 수 있는 IOC 기반 커맨드 프레임워크입니다.
+Ezframework는 Bukkit에서 사용할 수 있는 IOC 기반 커맨드 프레임워크입니다.
 
 
 ## 사용 방법
-
 
 ### Maven
 
@@ -48,9 +47,10 @@ dependencies {
 compileJava.options.compilerArgs = ['-parameters']
 ```
 
-### 사용방법
+### 초기화
+
 ```java
-public class Main extends JavaPlugin {
+class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         Ezplugin.run(this);
@@ -58,7 +58,9 @@ public class Main extends JavaPlugin {
 }
 ```
 
+### 커맨드 추가
 ```java
+
 @CommandService("message")
 public class MessageCommand {
 
@@ -80,8 +82,7 @@ public class MessageCommand {
 }
 ```
 
-#### Parameter Inject
-
+### 파라미터 추가
 ```java
 @Target(ElementType.PARAMETER)
 @Retention(RetentionPolicy.RUNTIME)
@@ -111,20 +112,32 @@ public class Send {
         player.sendMessage("[Server] /message <playerName> <message>");
         player.sendMessage("[Server] -----------------------");
     }
+    ...
+}
+```
+### 기본 제공 파라미터
 
-    @Command("<message>")
-    public void broadcastMessage(@PathVariable String message) {
-        Bukkit.broadcastMessage(message);
-    }
-
-    @Command("<playerName> <message>")
-    public void messageToPlayer(@PathVariable String playerName, @PathVariable String message) {
-        Player player = Bukkit.getPlayer(playerName);
-        player.sendMessage(message);
-    }
+```java
+@Command("<placeholder>")
+public void onCommand(CommandArgs commandArgs, CommandSender commandSender, Command command, @PathVariable String placeholder) {
+        
 }
 ```
 
-#### 기본 제공 파라미터
-- CommandArgs
-- @PathVariable
+### @PathVariable
+
+```java
+@Command("message send <playerName> <message>")
+public void sendMessage(@PathVariable String playerName, @PathVariable String message)
+```
+`@PathVariable` 은 공백 단위로 파라미터가 주입됩니다.
+예시) `/message send KingCjy hi` -> `playerName: KingCjy`, `message: hi`
+
+하지만 마지막 (<message>)는 공백을 무시합니다.
+예시) `/message send KingCjy hi my name is KingCjy` ->` playerName: KingCjy`, `message: hi my name is KingCjy`
+
+
+
+### 사용 예제
+
+예제 >> [GITHUB](https://github.com/KingCjy/ezframework-sample "github link")
