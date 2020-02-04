@@ -6,17 +6,17 @@ import me.kingcjy.ezframework.executor.CommandArgs;
 import me.kingcjy.ezframework.executor.method.HandlerMethodParameterProvider;
 import me.kingcjy.ezframework.executor.method.MethodParameter;
 import me.kingcjy.ezframework.util.PathPatternParser;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.bukkit.Bukkit;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 @Component
 public class PathVariableHandlerMethodParameterProvider implements HandlerMethodParameterProvider {
 
-    private static final Logger logger = LoggerFactory.getLogger(PathVariableHandlerMethodParameterProvider.class);
+    private static final Logger logger = Bukkit.getLogger();
 
     private Map<String, PathPatternParser> pathPatternParserCache = new HashMap<>();
 
@@ -54,7 +54,7 @@ public class PathVariableHandlerMethodParameterProvider implements HandlerMethod
             Object object =  objectMapper.readValue(pathParameterMap.get(parameterName), parameter.getParameterType());
             return object;
         } catch (IOException e) {
-            logger.error(e.getMessage());
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
     }

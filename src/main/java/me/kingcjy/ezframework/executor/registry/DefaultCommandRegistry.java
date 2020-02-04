@@ -89,7 +89,7 @@ public class DefaultCommandRegistry implements CommandRegistry {
     private Set<String> findCommands() {
         Set<String> commands = new HashSet<>();
         for (HandlerKey handlerKey : this.handlerMapping.getHandlerKeys()) {
-            String command = handlerKey.getCommand().replaceAll("<(.*)>", "").trim();
+            String command = handlerKey.getCommand().split(" ")[0];
             commands.add(command);
         }
         return commands;

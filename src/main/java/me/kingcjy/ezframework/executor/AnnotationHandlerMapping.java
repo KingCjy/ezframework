@@ -6,15 +6,16 @@ import me.kingcjy.ezframework.beans.factory.BeanFactory;
 import me.kingcjy.ezframework.beans.factory.BeanFactoryAware;
 import me.kingcjy.ezframework.executor.method.DefaultHandlerMethodFactory;
 import me.kingcjy.ezframework.executor.method.InvocableHandlerMethod;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.bukkit.Bukkit;
 
 import java.lang.reflect.Method;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AnnotationHandlerMapping implements HandlerMapping, BeanFactoryAware {
 
-    private static final Logger logger = LoggerFactory.getLogger(AnnotationHandlerMapping.class);
+    private static final Logger logger = Bukkit.getLogger();
 
     private BeanFactory beanFactory;
     private Map<HandlerKey, InvocableHandlerMethod> handlers = new HashMap<>();
@@ -47,7 +48,7 @@ public class AnnotationHandlerMapping implements HandlerMapping, BeanFactoryAwar
 
             InvocableHandlerMethod handlerMethod = handlerMethodFactory.createInvocableHandlerMethod(controllers.get(method.getDeclaringClass()), method);
             handlers.put(handlerKey, handlerMethod);
-            logger.debug("register command : /{}, method: {}", handlerKey.getCommand(), method);
+            logger.log(Level.INFO, "[EzFramework] register command : /{0}, method: {1}", new Object[]{handlerKey.getCommand(), method});
         }
     }
 

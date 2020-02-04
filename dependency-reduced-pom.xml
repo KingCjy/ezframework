@@ -4,8 +4,8 @@
   <groupId>io.github.kingcjy</groupId>
   <artifactId>ezframework-core</artifactId>
   <name>EzFramework</name>
-  <version>1.0.5</version>
-  <description>Spigot Command Framework</description>
+  <version>1.0.7</version>
+  <description>Bukkit Command Framework</description>
   <url>https://github.com/KingCjy/ezframework</url>
   <developers>
     <developer>
@@ -114,6 +114,26 @@
     </repository>
   </repositories>
   <dependencies>
+    <dependency>
+      <groupId>org.bukkit</groupId>
+      <artifactId>bukkit</artifactId>
+      <version>1.15.1-R0.1-SNAPSHOT</version>
+      <scope>provided</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>commons-lang</artifactId>
+          <groupId>commons-lang</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>gson</artifactId>
+          <groupId>com.google.code.gson</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>snakeyaml</artifactId>
+          <groupId>org.yaml</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>

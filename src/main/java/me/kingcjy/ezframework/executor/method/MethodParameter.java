@@ -1,14 +1,9 @@
 package me.kingcjy.ezframework.executor.method;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
 public class MethodParameter {
-
-    private static final Logger logger = LoggerFactory.getLogger(MethodParameter.class);
 
     private Method method;
     private int parameterIndex;

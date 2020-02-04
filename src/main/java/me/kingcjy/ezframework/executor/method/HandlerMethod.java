@@ -1,12 +1,8 @@
 package me.kingcjy.ezframework.executor.method;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.lang.reflect.Method;
 
 public class HandlerMethod {
-    private static final Logger logger = LoggerFactory.getLogger(HandlerMethod.class);
 
     private Method method;
     private Object instance;

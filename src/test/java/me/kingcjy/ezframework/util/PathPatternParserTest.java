@@ -4,10 +4,11 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class PathPatternParserTest {
+
     @Test
-    public void URI_TO_PATTERN_TEST() throws Exception {
-        PathPatternParser pathPatternParser = new PathPatternParser("do <fromPlayer> <toPlayer>");
-        String uri = "do ab cd";
+    public void URIPatternTest() throws Exception {
+        PathPatternParser pathPatternParser = new PathPatternParser("message send <fromPlayer> <toPlayer>");
+        String uri = "message send from to";
         Assert.assertTrue(pathPatternParser.matches(uri));
     }
 

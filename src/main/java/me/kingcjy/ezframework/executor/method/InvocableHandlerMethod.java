@@ -1,15 +1,17 @@
 package me.kingcjy.ezframework.executor.method;
 
 import me.kingcjy.ezframework.executor.CommandArgs;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.bukkit.Bukkit;
+
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class InvocableHandlerMethod extends HandlerMethod {
 
-    private static Logger logger = LoggerFactory.getLogger(InvocableHandlerMethod.class);
+    private static Logger logger = Bukkit.getLogger();
 
     private HandlerMethodParameterProviderComposite providers = new HandlerMethodParameterProviderComposite();
 
@@ -26,11 +28,11 @@ public class InvocableHandlerMethod extends HandlerMethod {
         try {
             return getMethod().invoke(getInstance(), args);
         } catch (IllegalAccessException e) {
-            logger.error(e.getMessage(), e);
+            logger.log(Level.SEVERE, "[EzFramework] " + e.getMessage(), e);
             throw new RuntimeException(e);
         } catch (InvocationTargetException e) {
             Throwable targetException = e.getTargetException();
-            logger.error(targetException.getMessage(), targetException);
+            logger.log(Level.SEVERE, "[EzFramework] " + targetException.getMessage(), targetException);
             throw new RuntimeException(targetException);
         }
     }
