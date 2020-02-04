@@ -26,8 +26,8 @@
                         <enabled>false</enabled>
                     </snapshots>
                     <id>central</id>
-                    <name>bintray-plugins</name>
-                    <url>http://jcenter.bintray.com</url>
+                    <name>central-plugins</name>
+                    <url>http://repo1.maven.org/maven2</url>
                 </pluginRepository>
             </pluginRepositories>
             <id>release</id>
