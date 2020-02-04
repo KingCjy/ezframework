@@ -5,6 +5,10 @@ cache:
   directories:
     - "$HOME/.cache"
 
+before_install:
+  - openssl enc -d -in ezframework.gpg.enc -out ezframework.gpg -aes256 -pass 'pass:$SECRET_KEY_PASSWORD'
+  - gpg --import ezframework.gpg
+
 deploy:
   provider: script
   script: "cp .travis.settings.xml $HOME/.m2/settings.xml && mvn deploy"
