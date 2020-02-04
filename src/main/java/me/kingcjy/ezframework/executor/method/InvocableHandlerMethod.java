@@ -25,9 +25,13 @@ public class InvocableHandlerMethod extends HandlerMethod {
         Object[] args = getMethodArgumentValues(commandArgs, providedArguments);
         try {
             return getMethod().invoke(getInstance(), args);
-        } catch (IllegalAccessException | InvocationTargetException e) {
-            logger.info(e.getMessage());
+        } catch (IllegalAccessException e) {
+            logger.error(e.getMessage(), e);
             throw new RuntimeException(e);
+        } catch (InvocationTargetException e) {
+            Throwable targetException = e.getTargetException();
+            logger.error(targetException.getMessage(), targetException);
+            throw new RuntimeException(targetException);
         }
     }
 

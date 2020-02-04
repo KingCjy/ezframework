@@ -15,7 +15,7 @@ Ezframework는 Spigot에서 사용할 수 있는 IOC 기반 커맨드 프레임�
     <dependency>
       <groupId>io.github.kingcjy</groupId>
       <artifactId>ezframework-core</artifactId>
-      <version>1.0.4</version>
+      <version>1.0.5</version>
     </dependency>
 </dependencies>
 

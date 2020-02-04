@@ -56,7 +56,7 @@ public class DefaultCommandRegistry implements CommandRegistry {
             method.setAccessible(true);
             method.invoke(Bukkit.getServer());
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            e.printStackTrace();
+
         }
     }
 
