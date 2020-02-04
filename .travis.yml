@@ -11,4 +11,4 @@ before_install:
   - openssl enc -d -in ezframework.gpg.enc -out ezframework.gpg -aes256 -pass "pass:$SECRET_KEY_PASSWORD"
   - gpg --import ezframework.gpg
 
-script: "mvn clean deploy -P release --setting settings.xml"
+script: "mvn clean deploy -P release --settings settings.xml"
