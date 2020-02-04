@@ -3,15 +3,11 @@ language: java
 
 cache:
   directories:
+    - "$HOME/.m2/repository"
     - "$HOME/.cache"
 
 before_install:
   - openssl enc -d -in ezframework.gpg.enc -out ezframework.gpg -aes256 -pass "pass:$SECRET_KEY_PASSWORD"
   - gpg --import ezframework.gpg
 
-deploy:
-  provider: script
-  script: "mvn clean deploy -P release --setting settings.xml"
-  skip_cleanup: true
-  on:
-    tags: true
+script: "mvn clean deploy -P release --setting settings.xml"
