@@ -133,7 +133,7 @@ public void sendMessage(@PathVariable String playerName, @PathVariable String me
 `@PathVariable` 은 공백 단위로 파라미터가 주입됩니다.
 예시) `/message send KingCjy hi` -> `playerName: KingCjy`, `message: hi`
 
-하지만 마지막 placeholder인 message 는 공백을 무시합니다.
+하지만 마지막 `placeholder`인 `message` 는 공백을 무시합니다.
 예시) `/message send KingCjy hi my name is KingCjy` ->` playerName: KingCjy`, `message: hi my name is KingCjy`
 
 
