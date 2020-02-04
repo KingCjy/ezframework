@@ -30,16 +30,14 @@
                     <url>http://jcenter.bintray.com</url>
                 </pluginRepository>
             </pluginRepositories>
-            <id>bintray</id>
-
+            <id>release</id>
             <properties>
                 <gpg.executable>gpg</gpg.executable>
-                <gpg.keyname>ezframework</gpg.keyname>
                 <gpg.passphrase>${env.MAVEN_GPG_PASSPHRASE}</gpg.passphrase>
             </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
         </profile>
     </profiles>
-    <activeProfiles>
-        <activeProfile>bintray</activeProfile>
-    </activeProfiles>
 </settings>

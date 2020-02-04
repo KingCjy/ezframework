@@ -11,7 +11,7 @@ before_install:
 
 deploy:
   provider: script
-  script: "mvn deploy --setting .travis.settings.xml"
+  script: "mvn clean deploy -P release --setting settings.xml"
   skip_cleanup: true
   on:
     tags: true
