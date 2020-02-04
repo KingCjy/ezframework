@@ -31,6 +31,12 @@
                 </pluginRepository>
             </pluginRepositories>
             <id>bintray</id>
+
+            <properties>
+                <gpg.executable>gpg</gpg.executable>
+                <gpg.keyname>ezframework</gpg.keyname>
+                <gpg.passphrase>${env.MAVEN_GPG_PASSPHRASE}</gpg.passphrase>
+            </properties>
         </profile>
     </profiles>
     <activeProfiles>
