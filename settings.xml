@@ -33,6 +33,7 @@
             <id>release</id>
             <properties>
                 <gpg.executable>gpg</gpg.executable>
+                <gpg.passphrase>${env.MAVEN_GPG_PASSPHRASE}</gpg.passphrase>
             </properties>
             <activation>
                 <activeByDefault>true</activeByDefault>
