@@ -17,7 +17,7 @@ Ezframework는 Bukkit에서 사용할 수 있는 IOC 기반 커맨드 프레임�
     <dependency>
       <groupId>io.github.kingcjy</groupId>
       <artifactId>ezframework-core</artifactId>
-      <version>1.0.7</version>
+      <version>1.0.8</version>
     </dependency>
 </dependencies>
 
@@ -41,7 +41,7 @@ Ezframework는 Bukkit에서 사용할 수 있는 IOC 기반 커맨드 프레임�
 ### Gradle
 ```groovy
 dependencies {
-    implementation 'io.github.kingcjy:ezframework-core:1.0.7'
+    implementation 'io.github.kingcjy:ezframework-core:1.0.8'
 }
 
 compileJava.options.compilerArgs = ['-parameters']
