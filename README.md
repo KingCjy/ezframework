@@ -82,6 +82,22 @@ public class MessageCommand {
 }
 ```
 
+### 명령어 오류
+command: `/message`
+```java
+@CommandService("message")
+public class Send {
+    @NotFound
+    public void notFound(@Sender Player player) {
+        player.sendMessage("[Server] -----------------------");
+        player.sendMessage("[Server] /message <message>");
+        player.sendMessage("[Server] /message <playerName> <message>");
+        player.sendMessage("[Server] -----------------------");
+    }
+    ...
+}
+```
+
 ### 파라미터 추가
 ```java
 @Target(ElementType.PARAMETER)
