@@ -9,6 +9,10 @@ public class HandlerMethod {
 
     private MethodParameter[] parameters;
 
+    public HandlerMethod() {
+
+    }
+
     public HandlerMethod(Object instance, Method method) {
         this.instance = instance;
         this.method = method;

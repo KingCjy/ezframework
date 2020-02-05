@@ -15,6 +15,10 @@ public class InvocableHandlerMethod extends HandlerMethod {
 
     private HandlerMethodParameterProviderComposite providers = new HandlerMethodParameterProviderComposite();
 
+    public InvocableHandlerMethod() {
+
+    }
+
     public InvocableHandlerMethod(Object instance, Method method) {
         super(instance, method);
     }

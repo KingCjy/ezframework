@@ -8,6 +8,7 @@ public interface HandlerMapping {
     void initialize();
 
     InvocableHandlerMethod getHandler(String command);
+    InvocableHandlerMethod getErrorHandler(String command);
 
     Set<HandlerKey> getHandlerKeys();
 }

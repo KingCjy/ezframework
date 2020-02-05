@@ -1,4 +1,4 @@
-package me.kingcjy.ezframework.executor.method.support;
+package me.kingcjy.ezframework.executor.method.support.provider;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import me.kingcjy.ezframework.annotations.*;

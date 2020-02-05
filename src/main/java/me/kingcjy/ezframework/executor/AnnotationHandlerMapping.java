@@ -2,12 +2,15 @@ package me.kingcjy.ezframework.executor;
 
 import me.kingcjy.ezframework.annotations.Command;
 import me.kingcjy.ezframework.annotations.CommandService;
+import me.kingcjy.ezframework.annotations.NotFound;
 import me.kingcjy.ezframework.beans.factory.BeanFactory;
 import me.kingcjy.ezframework.beans.factory.BeanFactoryAware;
 import me.kingcjy.ezframework.executor.method.DefaultHandlerMethodFactory;
 import me.kingcjy.ezframework.executor.method.InvocableHandlerMethod;
+import me.kingcjy.ezframework.executor.method.support.error.DefaultInvocableHandlerMethod;
 import org.bukkit.Bukkit;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.*;
 import java.util.logging.Level;
@@ -19,6 +22,7 @@ public class AnnotationHandlerMapping implements HandlerMapping, BeanFactoryAwar
 
     private BeanFactory beanFactory;
     private Map<HandlerKey, InvocableHandlerMethod> handlers = new HashMap<>();
+    private Map<String, InvocableHandlerMethod> notfoundHandlers = new HashMap<>();
 
     private DefaultHandlerMethodFactory handlerMethodFactory;
 
@@ -37,10 +41,13 @@ public class AnnotationHandlerMapping implements HandlerMapping, BeanFactoryAwar
     @Override
     public void initialize() {
         Map<Class<?>, Object> controllers = findAllCommandServices();
-        Set<Method> commandMethods = findAllCommandMethods(controllers.keySet());
+        Set<Method> commandMethods = findAllAnnotatedMethods(controllers.keySet(), Command.class);
+        Set<Method> notFoundMethods = findAllAnnotatedMethods(controllers.keySet(), NotFound.class);
 
         putMethodsToHandler(controllers, commandMethods);
+        putNotFountMethodsToHandler(controllers, notFoundMethods);
     }
+
 
     private void putMethodsToHandler(Map<Class<?>, Object> controllers, Set<Method> commandMethods) {
         for (Method method : commandMethods) {
@@ -49,6 +56,16 @@ public class AnnotationHandlerMapping implements HandlerMapping, BeanFactoryAwar
             InvocableHandlerMethod handlerMethod = handlerMethodFactory.createInvocableHandlerMethod(controllers.get(method.getDeclaringClass()), method);
             handlers.put(handlerKey, handlerMethod);
             logger.log(Level.INFO, "[EzFramework] register command : /{0}, method: {1}", new Object[]{handlerKey.getCommand(), method});
+        }
+    }
+
+    private void putNotFountMethodsToHandler(Map<Class<?>, Object> controllers, Set<Method> notFoundMethods) {
+        for (Method method : notFoundMethods) {
+            String key = method.getDeclaringClass().getAnnotation(CommandService.class).value();
+
+            InvocableHandlerMethod handlerMethod = handlerMethodFactory.createInvocableHandlerMethod(controllers.get(method.getDeclaringClass()), method);
+            notfoundHandlers.put(key, handlerMethod);
+            logger.log(Level.INFO, "[EzFramework] register not found method : /{0}, method: {1}", new Object[]{key, method});
         }
     }
 
@@ -86,18 +103,18 @@ public class AnnotationHandlerMapping implements HandlerMapping, BeanFactoryAwar
         return controllers;
     }
 
-    private Set<Method> findAllCommandMethods(Set<Class<?>> controllers) {
+    private Set<Method> findAllAnnotatedMethods(Set<Class<?>> controllers, Class<? extends Annotation> annotation) {
         Set<Method> commandMethods = new HashSet<>();
         for (Class<?> controller : controllers) {
-            commandMethods.addAll(findCommandMethods(controller));
+            commandMethods.addAll(findAnnotatedMethods(controller, annotation));
         }
         return commandMethods;
     }
 
-    private Set<Method> findCommandMethods(Class<?> controller) {
+    private Set<Method> findAnnotatedMethods(Class<?> controller, Class<? extends Annotation> annotation) {
         Set<Method> commandMethods = new HashSet<>();
         for (Method method : controller.getDeclaredMethods()) {
-            if(method.isAnnotationPresent(Command.class)) {
+            if(method.isAnnotationPresent(annotation)) {
                 commandMethods.add(method);
             }
         }
@@ -110,9 +127,19 @@ public class AnnotationHandlerMapping implements HandlerMapping, BeanFactoryAwar
                 .filter(handler -> handler.matches(command))
                 .findAny();
         if(handlerKeyOptional.isPresent() == false) {
-            return null;
+            return getErrorHandler(command);
         }
         return handlers.get(handlerKeyOptional.get());
+    }
+
+    @Override
+    public InvocableHandlerMethod getErrorHandler(String command) {
+        for (String key : notfoundHandlers.keySet()) {
+            if(command.contains(key)) {
+                return notfoundHandlers.get(key);
+            }
+        }
+        return new DefaultInvocableHandlerMethod();
     }
 
     @Override
