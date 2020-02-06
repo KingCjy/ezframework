@@ -7,7 +7,7 @@ import me.kingcjy.ezframework.beans.factory.BeanFactory;
 import me.kingcjy.ezframework.beans.factory.BeanFactoryAware;
 import me.kingcjy.ezframework.executor.method.DefaultHandlerMethodFactory;
 import me.kingcjy.ezframework.executor.method.InvocableHandlerMethod;
-import me.kingcjy.ezframework.executor.method.support.error.DefaultInvocableHandlerMethod;
+import me.kingcjy.ezframework.executor.method.support.notfound.DefaultInvocableHandlerMethod;
 import org.bukkit.Bukkit;
 
 import java.lang.annotation.Annotation;

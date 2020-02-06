@@ -53,7 +53,7 @@ compileJava.options.compilerArgs = ['-parameters']
 class Main extends JavaPlugin {
     @Override
     public void onEnable() {
-        Ezplugin.run(this);
+        EzFramework.run(this);
     }
 }
 ```

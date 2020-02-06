@@ -1,4 +1,4 @@
-package me.kingcjy.ezframework.executor.method.support.error;
+package me.kingcjy.ezframework.executor.method.support.notfound;
 
 import me.kingcjy.ezframework.executor.CommandArgs;
 import me.kingcjy.ezframework.executor.method.InvocableHandlerMethod;

@@ -7,7 +7,7 @@ import me.kingcjy.ezframework.executor.method.DefaultHandlerMethodFactory;
 import me.kingcjy.ezframework.executor.registry.DefaultCommandRegistry;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class EzPlugin {
+public class EzFramework {
     public static void run(JavaPlugin instance) {
         DefaultBeanFactory beanFactory = new DefaultBeanFactory();
         ClassPathBeanDefinitionScanner scanner = new ClassPathBeanDefinitionScanner(beanFactory);
