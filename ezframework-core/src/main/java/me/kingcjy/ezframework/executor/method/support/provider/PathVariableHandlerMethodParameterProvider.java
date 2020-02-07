@@ -31,9 +31,9 @@ public class PathVariableHandlerMethodParameterProvider implements HandlerMethod
     public Object resolveParameter(CommandArgs commandArgs, MethodParameter parameter) {
         Command commandAnnotation = parameter.getMethod().getAnnotation(Command.class);
         PathVariable pathVariable = parameter.getParameterAnnotation(PathVariable.class);
-        CommandService commandService = parameter.getMethod().getDeclaringClass().getAnnotation(CommandService.class);
+        EzCommand ezCommand = parameter.getMethod().getDeclaringClass().getAnnotation(EzCommand.class);
 
-        String command = getCommand(commandService, commandAnnotation);
+        String command = getCommand(ezCommand, commandAnnotation);
 
         if(pathPatternParserCache.get(commandAnnotation.value()) == null) {
             PathPatternParser pathPatternParser = new PathPatternParser(command);
@@ -59,12 +59,12 @@ public class PathVariableHandlerMethodParameterProvider implements HandlerMethod
         }
     }
 
-    public String getCommand(CommandService commandService, Command commandAnnotation) {
-        if("".equals(commandService.value())) {
+    public String getCommand(EzCommand ezCommand, Command commandAnnotation) {
+        if("".equals(ezCommand.value())) {
             return commandAnnotation.value();
         }
 
-        return commandService.value() +  " " + commandAnnotation.value();
+        return ezCommand.value() +  " " + commandAnnotation.value();
     }
 
     private String getParameterName(PathVariable pathVariable, MethodParameter parameter) {

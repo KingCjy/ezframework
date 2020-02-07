@@ -17,7 +17,7 @@ Ezframework는 Bukkit에서 사용할 수 있는 IOC 기반 커맨드 프레임�
     <dependency>
       <groupId>io.github.kingcjy</groupId>
       <artifactId>ezframework-core</artifactId>
-      <version>1.0.8</version>
+      <version>1.1.0</version>
     </dependency>
 </dependencies>
 
@@ -41,7 +41,7 @@ Ezframework는 Bukkit에서 사용할 수 있는 IOC 기반 커맨드 프레임�
 ### Gradle
 ```groovy
 dependencies {
-    implementation 'io.github.kingcjy:ezframework-core:1.0.8'
+    implementation 'io.github.kingcjy:ezframework-core:1.1.0'
 }
 
 compileJava.options.compilerArgs = ['-parameters']
@@ -61,7 +61,7 @@ class Main extends JavaPlugin {
 ### 커맨드 추가
 ```java
 
-@CommandService("message")
+@EzCommand("message")
 public class MessageCommand {
 
 // /message <message>
@@ -85,7 +85,7 @@ public class MessageCommand {
 ### 명령어 오류
 command: `/message`
 ```java
-@CommandService("message")
+@EzCommand("message")
 public class Send {
     @NotFound
     public void notFound(@Sender Player player) {
@@ -119,7 +119,7 @@ public class SenderMethodParameterProvider implements HandlerMethodParameterProv
     }
 }
 
-@CommandService("message")
+@EzCommand("message")
 public class Send {
     @Command("help")
     public void sendMessage(@Sender Player player) {
@@ -140,7 +140,7 @@ public void onCommand(CommandArgs commandArgs, CommandSender commandSender, Comm
 }
 ```
 
-### @PathVariable
+#### @PathVariable
 
 ```java
 @Command("message send <playerName> <message>")
@@ -153,6 +153,23 @@ public void sendMessage(@PathVariable String playerName, @PathVariable String me
 예시) `/message send KingCjy hi my name is KingCjy` ->` playerName: KingCjy`, `message: hi my name is KingCjy`
 
 
+### Event
+
+`@EzEvent` 어노테이션을 붙이면 자동으로 이벤트에 등록됩니다.
+
+`getServer().getPluginManager().registerEvents(Listener listener, JavaPlugin javaplugin);`를 대신 합니다.
+
+```java
+@EzEvent
+public class JoinEvent implements Listener {
+
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        Player player = event.getPlayer();
+        player.sendMessage("[TestPlugin]: 환영합니다!");
+    }
+}
+```
 
 ### 사용 예제
 

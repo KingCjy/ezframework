@@ -8,6 +8,5 @@ import java.lang.annotation.Target;
 @Component
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface CommandService {
-    String value() default "";
+public @interface EzEvent {
 }
