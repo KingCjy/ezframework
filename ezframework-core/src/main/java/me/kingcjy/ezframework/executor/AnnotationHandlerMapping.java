@@ -1,7 +1,7 @@
 package me.kingcjy.ezframework.executor;
 
 import me.kingcjy.ezframework.annotations.Command;
-import me.kingcjy.ezframework.annotations.CommandService;
+import me.kingcjy.ezframework.annotations.EzCommand;
 import me.kingcjy.ezframework.annotations.NotFound;
 import me.kingcjy.ezframework.beans.factory.BeanFactory;
 import me.kingcjy.ezframework.beans.factory.BeanFactoryAware;
@@ -61,7 +61,7 @@ public class AnnotationHandlerMapping implements HandlerMapping, BeanFactoryAwar
 
     private void putNotFountMethodsToHandler(Map<Class<?>, Object> controllers, Set<Method> notFoundMethods) {
         for (Method method : notFoundMethods) {
-            String key = method.getDeclaringClass().getAnnotation(CommandService.class).value();
+            String key = method.getDeclaringClass().getAnnotation(EzCommand.class).value();
 
             InvocableHandlerMethod handlerMethod = handlerMethodFactory.createInvocableHandlerMethod(controllers.get(method.getDeclaringClass()), method);
             notfoundHandlers.put(key, handlerMethod);
@@ -80,8 +80,8 @@ public class AnnotationHandlerMapping implements HandlerMapping, BeanFactoryAwar
     }
 
     private String findClassCommand(Class<?> targetClass) {
-        if(targetClass.isAnnotationPresent(CommandService.class)) {
-            CommandService command = targetClass.getAnnotation(CommandService.class);
+        if(targetClass.isAnnotationPresent(EzCommand.class)) {
+            EzCommand command = targetClass.getAnnotation(EzCommand.class);
             return command.value();
         }
         return "";
@@ -96,7 +96,7 @@ public class AnnotationHandlerMapping implements HandlerMapping, BeanFactoryAwar
     private Map<Class<?>, Object> findAllCommandServices() {
         Map<Class<?>, Object> controllers = new HashMap<>();
         for (Object bean : this.beanFactory.getBeans()) {
-            if(bean.getClass().isAnnotationPresent(CommandService.class)) {
+            if(bean.getClass().isAnnotationPresent(EzCommand.class)) {
                 controllers.put(bean.getClass(), this.beanFactory.getBean(bean.getClass().getName()));
             }
         }

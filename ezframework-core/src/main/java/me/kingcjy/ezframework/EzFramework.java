@@ -5,6 +5,7 @@ import me.kingcjy.ezframework.beans.factory.DefaultBeanFactory;
 import me.kingcjy.ezframework.executor.AnnotationHandlerMapping;
 import me.kingcjy.ezframework.executor.method.DefaultHandlerMethodFactory;
 import me.kingcjy.ezframework.executor.registry.DefaultCommandRegistry;
+import me.kingcjy.ezframework.executor.registry.DefaultEventRegistry;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class EzFramework {
@@ -22,5 +23,8 @@ public class EzFramework {
 
         DefaultCommandRegistry defaultCommandRegistry = new DefaultCommandRegistry(instance, annotationHandlerMapping);
         defaultCommandRegistry.registerCommands();
+
+        DefaultEventRegistry defaultEventRegistry = new DefaultEventRegistry(instance, beanFactory);
+        defaultEventRegistry.registerEvents();;
     }
 }
