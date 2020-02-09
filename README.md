@@ -206,6 +206,7 @@ public class MessageCommand {
 
 #### 메세지 커스텀
 `resource/me/kingcjy/ezframework/resource/help.ez` 추가
+
 `default`
 ```
 <prefix>-------- [EzFramework] --------</prefix>
