@@ -4,6 +4,7 @@ import me.kingcjy.ezframework.annotations.Component;
 import me.kingcjy.ezframework.beans.factory.BeanFactory;
 import me.kingcjy.ezframework.beans.factory.BeanFactoryAware;
 import me.kingcjy.ezframework.beans.factory.InitializingBean;
+import me.kingcjy.ezframework.executor.method.invoke.InvocableHandlerMethod;
 
 import java.lang.reflect.Method;
 import java.util.HashSet;

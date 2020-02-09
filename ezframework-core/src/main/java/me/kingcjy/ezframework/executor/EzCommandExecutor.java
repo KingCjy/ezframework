@@ -1,6 +1,7 @@
 package me.kingcjy.ezframework.executor;
 
-import me.kingcjy.ezframework.executor.method.InvocableHandlerMethod;
+
+import me.kingcjy.ezframework.executor.method.invoke.InvocableHandlerMethod;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

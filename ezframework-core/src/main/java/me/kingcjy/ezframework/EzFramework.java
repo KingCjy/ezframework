@@ -6,10 +6,12 @@ import me.kingcjy.ezframework.executor.AnnotationHandlerMapping;
 import me.kingcjy.ezframework.executor.method.DefaultHandlerMethodFactory;
 import me.kingcjy.ezframework.executor.registry.DefaultCommandRegistry;
 import me.kingcjy.ezframework.executor.registry.DefaultEventRegistry;
+import me.kingcjy.ezframework.resource.ResourceLoader;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class EzFramework {
     public static void run(JavaPlugin instance) {
+        ResourceLoader.initialize(instance.getClass());
         DefaultBeanFactory beanFactory = new DefaultBeanFactory();
         ClassPathBeanDefinitionScanner scanner = new ClassPathBeanDefinitionScanner(beanFactory);
         scanner.scan(instance.getClass().getPackage().getName());

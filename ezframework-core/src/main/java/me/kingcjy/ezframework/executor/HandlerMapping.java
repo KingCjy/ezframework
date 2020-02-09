@@ -1,6 +1,6 @@
 package me.kingcjy.ezframework.executor;
 
-import me.kingcjy.ezframework.executor.method.InvocableHandlerMethod;
+import me.kingcjy.ezframework.executor.method.invoke.InvocableHandlerMethod;
 
 import java.util.Set;
 
