@@ -17,7 +17,7 @@ Ezframework는 Bukkit에서 사용할 수 있는 IOC 기반 커맨드 프레임�
     <dependency>
       <groupId>io.github.kingcjy</groupId>
       <artifactId>ezframework-core</artifactId>
-      <version>1.1.0</version>
+      <version>1.1.1</version>
     </dependency>
 </dependencies>
 
@@ -41,7 +41,7 @@ Ezframework는 Bukkit에서 사용할 수 있는 IOC 기반 커맨드 프레임�
 ### Gradle
 ```groovy
 dependencies {
-    implementation 'io.github.kingcjy:ezframework-core:1.1.0'
+    implementation 'io.github.kingcjy:ezframework-core:1.1.1'
 }
 
 compileJava.options.compilerArgs = ['-parameters']
@@ -153,7 +153,7 @@ public void sendMessage(@PathVariable String playerName, @PathVariable String me
 예시) `/message send KingCjy hi my name is KingCjy` ->` playerName: KingCjy`, `message: hi my name is KingCjy`
 
 
-### Event
+### 이벤트 등록
 
 `@EzEvent` 어노테이션을 붙이면 자동으로 이벤트에 등록됩니다.
 
@@ -170,6 +170,68 @@ public class JoinEvent implements Listener {
     }
 }
 ```
+
+### Help 명령어 자동생성
+`@GenerateHelpCommand`, `@Description`
+```java
+@GenerateHelpCommand
+@EzCommand("message")
+public class MessageCommand {
+    @Command("send <playerName> <message>")
+    @Description("플레이어에게 메세지를 보냅니다.")
+    public void messageToPlayer(@PathVariable String playerName, @PathVariable String message) {
+        Player player = Bukkit.getPlayer(playerName);
+
+        if(player != null) {
+            player.sendMessage(message);
+        }
+    }
+
+    @Command("broadcast <message>")
+    @Description("플레이어 전체에게 메세지를 보냅니다.")
+    public void broadcastMessage(@PathVariable String message) {
+        Bukkit.broadcastMessage(message);
+    }
+}
+```
+
+#### 기본 메세지
+`/message help`
+```
+-------- [EzFramework] --------
+/message send <playerName> <message> - 플레이어에게 메세지를 보냅니다.
+/message broadcast <message> - 플레이어 전체에게 메세지를 보냅니다.
+-------------------------------
+```
+
+#### 메세지 커스텀
+`resource/me/kingcjy/ezframework/resource/help.ez` 추가
+`default`
+```
+<prefix>-------- [EzFramework] --------</prefix>
+<command>§3{help.command} - {help.description}</command>
+<suffix>-------------------------------</suffix>
+```
+`커스텀`
+```
+<prefix>
+-------------------------------
+-------- [내 플러그인!!] ---------
+</prefix>
+<command>§3{help.command} - {help.description}</command>
+<suffix>
+-------------------------------
+</suffix>
+```
+`결과`
+```
+-------------------------------
+-------- [내 플러그인!!] ---------
+/message send <playerName> <message> - 플레이어에게 메세지를 보냅니다.
+/message broadcast <message> - 플레이어 전체에게 메세지를 보냅니다.
+-------------------------------
+```
+
 
 ### 사용 예제
 
