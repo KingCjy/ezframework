@@ -2,17 +2,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>ezframework</artifactId>
+        <groupId>io.github.kingcjy</groupId>
+        <version>1.1.1</version>
+    </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.github.kingcjy</groupId>
-    <artifactId>ezframework</artifactId>
-    <packaging>pom</packaging>
-    <version>1.1.1</version>
+    <artifactId>ezframework-jdbc</artifactId>
 
-    <modules>
-        <module>ezframework-core</module>
-        <module>ezframework-jdbc</module>
-        <module>ezframework-autoconfigure</module>
-    </modules>
 
 </project>
