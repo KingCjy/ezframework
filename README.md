@@ -236,8 +236,8 @@ public class MessageCommand {
 
 ### 사용 예제
 
-예제 >> [GITHUB](https://github.com/KingCjy/ezframework-sample "github link")
+예제 >> [GITHUB](http발s://github.com/KingCjy/ezframework-sample "github link")
 
-### 플러그인 갭라 방법
+### 플러그인 개발 방법
 
 [1. 마인크래프트 플러그인 개발 - 1. 명령어 추가](https://velog.io/@kingcjy/1.-%EB%AA%85%EB%A0%B9%EC%96%B4-%EC%B6%94%EA%B0%80) 
