@@ -31,7 +31,9 @@ repositories {
     ...
     maven { url 'https://jitpack.io' }
 }
-        
+```
+
+```groovy
 dependencies {
     implementation 'com.github.bagble.ezframework:ezframework-core:1.1.1'
 }
