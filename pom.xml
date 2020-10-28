@@ -11,8 +11,6 @@
 
     <modules>
         <module>ezframework-core</module>
-        <module>ezframework-jdbc</module>
-        <module>ezframework-autoconfigure</module>
     </modules>
 
 </project>
