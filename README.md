@@ -11,29 +11,29 @@ Ezframework는 Bukkit에서 사용할 수 있는 IOC 기반 커맨드 프레임�
 ### Maven
 
 ```xml
-	<repositories>
-		<repository>
-		    <id>jitpack.io</id>
-		    <url>https://jitpack.io</url>
-		</repository>
-	</repositories>
+<repositories>
+	<repository>
+	    <id>jitpack.io</id>
+	    <url>https://jitpack.io</url>
+	</repository>
+</repositories>
 
-	<dependency>
-	    <groupId>com.github.bagble.ezframework</groupId>
-	    <artifactId>ezframework-core</artifactId>
-	    <version>1.1.1</version>
-	</dependency>
+<dependency>
+    <groupId>com.github.bagble.ezframework</groupId>
+    <artifactId>ezframework-core</artifactId>
+    <version>1.1.1</version>
+</dependency>
 ```
 
 ### Gradle
 ```groovy
 repositories {
-	...
-	maven { url 'https://jitpack.io' }
+    ...
+    maven { url 'https://jitpack.io' }
 }
         
 dependencies {
-	    implementation 'com.github.bagble.ezframework:ezframework-core:1.1.1'
+    implementation 'com.github.bagble.ezframework:ezframework-core:1.1.1'
 }
 
 compileJava.options.compilerArgs = ['-parameters']
