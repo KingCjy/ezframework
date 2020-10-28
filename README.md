@@ -1,7 +1,5 @@
 # Ezframework
-[![Download](https://api.bintray.com/packages/kingcjy/ezframework/ezframework-core/images/download.svg) ](https://bintray.com/kingcjy/ezframework/ezframework-core/_latestVersion)
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.kingcjy/ezframework-core.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22io.github.kingcjy%22%20AND%20a:%22ezframework-core%22)
-[![Build Status](https://travis-ci.org/KingCjy/ezframework.svg?branch=master)](https://travis-ci.org/KingCjy/ezframework)
+[![Jitpack](https://jitpack.io/v/bagble/ezframework.svg)](https://jitpack.io/#bagble/ezframework)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 
@@ -13,35 +11,29 @@ Ezframework는 Bukkit에서 사용할 수 있는 IOC 기반 커맨드 프레임�
 ### Maven
 
 ```xml
-<dependencies>
-    <dependency>
-      <groupId>io.github.kingcjy</groupId>
-      <artifactId>ezframework-core</artifactId>
-      <version>1.1.1</version>
-    </dependency>
-</dependencies>
+	<repositories>
+		<repository>
+		    <id>jitpack.io</id>
+		    <url>https://jitpack.io</url>
+		</repository>
+	</repositories>
 
-<build>
-    <plugins>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <configuration>
-                <source>1.8</source>
-                <target>1.8</target>
-                <compilerArgs>
-                    <arg>-parameters</arg>
-                </compilerArgs>
-            </configuration>
-        </plugin>
-    </plugins>
-</build>
+	<dependency>
+	    <groupId>com.github.bagble.ezframework</groupId>
+	    <artifactId>ezframework-core</artifactId>
+	    <version>1.1.1</version>
+	</dependency>
 ```
 
 ### Gradle
 ```groovy
+repositories {
+	...
+	maven { url 'https://jitpack.io' }
+}
+        
 dependencies {
-    implementation 'io.github.kingcjy:ezframework-core:1.1.1'
+	    implementation 'com.github.bagble.ezframework:ezframework-core:1.1.1'
 }
 
 compileJava.options.compilerArgs = ['-parameters']
