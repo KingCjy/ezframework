@@ -7,7 +7,7 @@
     <groupId>io.github.kingcjy</groupId>
     <artifactId>ezframework</artifactId>
     <packaging>pom</packaging>
-    <version>1.1.1</version>
+    <version>1.2.0</version>
 
     <modules>
         <module>ezframework-core</module>
