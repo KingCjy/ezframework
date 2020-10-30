@@ -46,8 +46,8 @@ public class AnnotationHandlerMapping implements HandlerMapping, BeanFactoryAwar
         Set<Method> commandMethods = findAllAnnotatedMethods(controllers.keySet(), Command.class);
         Set<Method> notFoundMethods = findAllAnnotatedMethods(controllers.keySet(), NotFound.class);
 
-        putTabCompleteToHandler(controllers, commandTabCompleteMethods);
         putMethodsToHandler(controllers, commandMethods);
+        putTabCompleteMethodsToHandler(controllers, commandTabCompleteMethods);
         putNotFountMethodsToHandler(controllers, notFoundMethods);
         generateHelpCommands();
     }
