@@ -4,7 +4,7 @@
   <groupId>io.github.kingcjy</groupId>
   <artifactId>ezframework-core</artifactId>
   <name>EzFramework</name>
-  <version>1.0.8</version>
+  <version>1.2.0</version>
   <description>Bukkit Command Framework</description>
   <url>https://github.com/KingCjy/ezframework</url>
   <developers>
