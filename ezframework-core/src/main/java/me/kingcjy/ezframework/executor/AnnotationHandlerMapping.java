@@ -42,11 +42,11 @@ public class AnnotationHandlerMapping implements HandlerMapping, BeanFactoryAwar
     @Override
     public void initialize() {
         Map<Class<?>, Object> controllers = findAnnotatedClasses(EzCommand.class);
-        Set<Method> commandTabComplete = findAllAnnotatedMethods(controllers.keySet(), TabComplete.class);
+        Set<Method> commandTabCompleteMethods = findAllAnnotatedMethods(controllers.keySet(), TabComplete.class);
         Set<Method> commandMethods = findAllAnnotatedMethods(controllers.keySet(), Command.class);
         Set<Method> notFoundMethods = findAllAnnotatedMethods(controllers.keySet(), NotFound.class);
 
-        putTabCompleteToHandler(controllers, commandTabComplete);
+        putTabCompleteToHandler(controllers, commandTabCompleteMethods);
         putMethodsToHandler(controllers, commandMethods);
         putNotFountMethodsToHandler(controllers, notFoundMethods);
         generateHelpCommands();
@@ -97,6 +97,16 @@ public class AnnotationHandlerMapping implements HandlerMapping, BeanFactoryAwar
             InvocableHandlerMethod handlerMethod = handlerMethodFactory.createInvocableHandlerMethod(controllers.get(method.getDeclaringClass()), method);
             notfoundHandlers.put(key, handlerMethod);
             logger.log(Level.INFO, "[EzFramework] register not found method : /{0}, method: {1}", new Object[]{key, method});
+        }
+    }
+    
+    private void putTabCompleteMethodsToHandler(Map<Class<?>, Object> controllers, Set<Method> commandTabCompleteMethods) {
+        for (Method method : commandTabCompleteMethods) {
+            String key = method.getDeclaringClass().getAnnotation(EzCommand.class).value();
+
+            InvocableHandlerMethod handlerMethod = handlerMethodFactory.createInvocableHandlerMethod(controllers.get(method.getDeclaringClass()), method);
+            tabcompleteHandlers.put(key, handlerMethod);
+            logger.log(Level.INFO, "[EzFramework] register TabComplete method : /{0}, method: {1}", new Object[]{key, method});
         }
     }
 
