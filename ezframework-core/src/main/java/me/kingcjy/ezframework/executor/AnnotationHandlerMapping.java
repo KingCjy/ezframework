@@ -184,7 +184,7 @@ public class AnnotationHandlerMapping implements HandlerMapping, BeanFactoryAwar
         return new DefaultInvocableHandlerMethod();
     }
     
-    @Override
+    /*@Override
     public InvocableHandlerMethod getTabCompleteHandler(String command) {
         for (String key : tabcompleteHandlers.keySet()) {
             if(command.contains(key)) {
@@ -192,7 +192,7 @@ public class AnnotationHandlerMapping implements HandlerMapping, BeanFactoryAwar
             }
         }
         return new DefaultInvocableHandlerMethod();
-    }
+    }*/
 
     @Override
     public Set<HandlerKey> getHandlerKeys() {
