@@ -42,9 +42,11 @@ public class AnnotationHandlerMapping implements HandlerMapping, BeanFactoryAwar
     @Override
     public void initialize() {
         Map<Class<?>, Object> controllers = findAnnotatedClasses(EzCommand.class);
+        Set<Method> commandTabComplete = findAllAnnotatedMethods(controllers.keySet(), TabComplete.class);
         Set<Method> commandMethods = findAllAnnotatedMethods(controllers.keySet(), Command.class);
         Set<Method> notFoundMethods = findAllAnnotatedMethods(controllers.keySet(), NotFound.class);
 
+        putTabCompleteToHandler(controllers, commandTabComplete);
         putMethodsToHandler(controllers, commandMethods);
         putNotFountMethodsToHandler(controllers, notFoundMethods);
         generateHelpCommands();
