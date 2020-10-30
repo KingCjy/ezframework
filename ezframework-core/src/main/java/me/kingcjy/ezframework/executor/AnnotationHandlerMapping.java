@@ -24,6 +24,7 @@ public class AnnotationHandlerMapping implements HandlerMapping, BeanFactoryAwar
     private BeanFactory beanFactory;
     private Map<HandlerKey, InvocableHandlerMethod> handlers = new HashMap<>();
     private Map<String, InvocableHandlerMethod> notfoundHandlers = new HashMap<>();
+    private Map<String, InvocableHandlerMethod> tabcompleteHandlers = new HashMap<>();
 
     private DefaultHandlerMethodFactory handlerMethodFactory;
 
@@ -178,6 +179,16 @@ public class AnnotationHandlerMapping implements HandlerMapping, BeanFactoryAwar
         for (String key : notfoundHandlers.keySet()) {
             if(command.contains(key)) {
                 return notfoundHandlers.get(key);
+            }
+        }
+        return new DefaultInvocableHandlerMethod();
+    }
+    
+    @Override
+    public InvocableHandlerMethod getTabCompleteHandler(String command) {
+        for (String key : tabcompleteHandlers.keySet()) {
+            if(command.contains(key)) {
+                return tabcompleteHandlers.get(key);
             }
         }
         return new DefaultInvocableHandlerMethod();
